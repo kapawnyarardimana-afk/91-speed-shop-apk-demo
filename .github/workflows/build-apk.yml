@@ -29,9 +29,6 @@ jobs:
         with:
           gradle-version: '8.9'
 
-      - name: Setup Android SDK
-        uses: android-actions/setup-android@v3
-
       - name: Create Android project
         shell: bash
         run: |
@@ -90,8 +87,7 @@ jobs:
           <manifest xmlns:android="http://schemas.android.com/apk/res/android">
               <application
                   android:theme="@style/AppTheme"
-                  android:label="91 SPEED SHOP"
-                  android:usesCleartextTraffic="true">
+                  android:label="91 SPEED SHOP">
                   <activity
                       android:name=".MainActivity"
                       android:exported="true">
@@ -126,11 +122,13 @@ jobs:
           import android.webkit.WebViewClient;
 
           public class MainActivity extends Activity {
+              private WebView web;
+
               @Override
               protected void onCreate(Bundle savedInstanceState) {
                   super.onCreate(savedInstanceState);
 
-                  WebView web = new WebView(this);
+                  web = new WebView(this);
                   WebSettings settings = web.getSettings();
                   settings.setJavaScriptEnabled(true);
                   settings.setDomStorageEnabled(true);
@@ -142,15 +140,31 @@ jobs:
 
               @Override
               public void onBackPressed() {
-                  WebView web = (WebView) findViewById(android.R.id.content).getRootView();
-                  super.onBackPressed();
+                  if (web != null && web.canGoBack()) {
+                      web.goBack();
+                  } else {
+                      super.onBackPressed();
+                  }
               }
           }
           EOF
 
       - name: Install Android SDK
+        shell: bash
         run: |
-          sdkmanager "platforms;android-35" "build-tools;35.0.0"
+          SDKMANAGER="$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager"
+
+          if [ ! -f "$SDKMANAGER" ]; then
+            SDKMANAGER="$(find "$ANDROID_HOME/cmdline-tools" -name sdkmanager -type f | head -n 1)"
+          fi
+
+          if [ ! -f "$SDKMANAGER" ]; then
+            echo "Android SDK manager tidak ditemukan"
+            exit 1
+          fi
+
+          yes | "$SDKMANAGER" --licenses || true
+          "$SDKMANAGER" "platforms;android-35" "build-tools;35.0.0"
 
       - name: Build APK
         run: gradle assembleDebug
@@ -160,4 +174,5 @@ jobs:
         with:
           name: 91-SPEED-SHOP-APK
           path: app/build/outputs/apk/debug/app-debug.apk
+          if-no-files-found: error
           
