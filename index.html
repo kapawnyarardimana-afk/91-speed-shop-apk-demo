@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="theme-color" content="#080b12">
+<title>91 SPEED SHOP DEMO</title>
+<style>
+:root{--bg:#080b12;--panel:#111827;--panel2:#172235;--blue:#28a8ff;--cyan:#59dcff;--muted:#8fa3bb;--white:#f4f8ff}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 80% 0%,#102c49 0,transparent 36%),var(--bg);color:var(--white);font-family:Arial,sans-serif}
+header{padding:22px 18px 16px;position:sticky;top:0;background:#080b12ed;backdrop-filter:blur(12px);z-index:3;border-bottom:1px solid #23334a}
+.brand{font-weight:900;letter-spacing:2px;font-size:22px}.brand span{color:var(--cyan)}.sub{font-size:11px;color:var(--muted);letter-spacing:3px;margin-top:5px}
+main{padding:16px 14px 92px;max-width:720px;margin:auto}.hero{background:linear-gradient(135deg,#142b46,#101827 65%);border:1px solid #254667;border-radius:18px;padding:20px;margin-bottom:16px;box-shadow:0 12px 35px #0007}
+.hero h1{font-size:25px;margin:0 0 8px}.hero p{color:#b5c8dc;font-size:13px;line-height:1.5;margin:0}.tag{display:inline-block;color:#75e5ff;border:1px solid #28668b;padding:5px 9px;border-radius:20px;font-size:10px;letter-spacing:1px;margin-bottom:12px}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.tile,.panel{background:linear-gradient(145deg,#172338,#101722);border:1px solid #263a55;border-radius:15px;padding:15px}.tile{min-height:105px;text-align:left;color:var(--white);font-weight:bold;font-size:14px}.tile small{display:block;color:var(--muted);font-weight:400;margin-top:8px;font-size:11px}.ico{font-size:23px;margin-bottom:10px}
+.page{display:none}.page.active{display:block}.title{font-size:21px;margin:8px 0 14px}.panel{margin:10px 0}.row{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:12px 0}.muted{color:var(--muted);font-size:12px}
+button,.btn{border:0;border-radius:10px;padding:11px 14px;background:linear-gradient(90deg,#087dcc,#16a9df);color:white;font-weight:bold;font-size:13px}
+input,select{background:#080f1b;border:1px solid #2b4564;color:white;border-radius:9px;padding:10px;width:100%;margin-top:6px}
+input[type=range]{padding:0;accent-color:#22b8ff}label{font-size:12px;color:#b9cbe0;display:block;margin:13px 0}
+nav{position:fixed;bottom:0;left:0;right:0;display:flex;justify-content:space-around;background:#0b111dec;border-top:1px solid #263a55;padding:10px 4px calc(10px + env(safe-area-inset-bottom));z-index:4}
+nav button{background:transparent;color:#9eb2c9;padding:8px 5px;font-size:10px}nav button.active{color:#58dfff}
+canvas{width:100%;background:#05080e;border:1px solid #28415d;border-radius:10px;image-rendering:pixelated}
+.big{font-size:38px;font-weight:900;color:var(--cyan);text-align:center;margin:10px}
+.switch{transform:scale(1.25);accent-color:#22b8ff}
+.stat{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.stat div{background:#0b1421;padding:12px;border-radius:10px;text-align:center}.stat b{display:block;color:#5bdcff;font-size:19px}.stat small{color:var(--muted)}
+</style>
+</head>
+<body>
+<header><div class="brand" style="display:flex;align-items:center;gap:10px"><img src="91-speed-shop-logo.png" alt="91 SPEED SHOP logo" style="width:44px;height:44px;object-fit:contain;border-radius:8px"><span>91 <span>SPEED SHOP</span></span></div><div class="sub">AUTOMOTIVE CONTROL • DEMO v1.0</div></header>
+<main>
+<section id="home" class="page active">
+<div class="hero"><div class="tag">DEMO MODE • NO LOGIN</div><h1>CONTROL YOUR BUILD.</h1><p>Dashboard simulasi kontrol mobil. Integrasi ke Roblox A-Chassis belum aktif pada versi demo ini.</p></div>
+<div class="grid">
+<button class="tile" onclick="show('lighting')"><div class="ico">💡</div>Lighting<small>DRL • Lampu • Sein</small></button>
+<button class="tile" onclick="show('pixel')"><div class="ico">▦</div>AI Pixel Studio<small>Image to Pixel • Custom LED</small></button>
+<button class="tile" onclick="show('suspension')"><div class="ico">🚘</div>Air Suspension<small>FL • FR • RL • RR</small></button>
+<button class="tile" onclick="show('drag')"><div class="ico">🏁</div>Drag Controller<small>Timer • Launch • Gear</small></button>
+<button class="tile" onclick="show('ecu')"><div class="ico">📈</div>ECU & Dyno<small>Telemetry simulasi</small></button>
+<button class="tile" onclick="show('sound')"><div class="ico">🔊</div>Sound Sync<small>Audio reactive demo</small></button>
+</div></section>
+
+<section id="lighting" class="page"><h2 class="title">Lighting Controller</h2><div class="panel">
+<label>DRL <span class="row"><span>Power</span><input class="switch" type="checkbox" checked></span></label>
+<label>Mode<select><option>Static</option><option>Pulse</option><option>Breathing</option><option>Sequential</option></select></label>
+<label>Warna LED<input type="color" value="#21baff"></label>
+<label>Brightness <input type="range" min="0" max="100" value="80"></label>
+<label>Animation Speed <input type="range" min="1" max="100" value="50"></label>
+<label>Fog Lamp <span class="row"><span>Power</span><input class="switch" type="checkbox"></span></label>
+<label>Hazard / Sein <span class="row"><span>Power</span><input class="switch" type="checkbox"></span></label>
+</div></section>
+
+<section id="pixel" class="page"><h2 class="title">AI Pixel Studio</h2><div class="panel">
+<p class="muted">Pilih gambar atau logo. Demo ini mengubah gambar menjadi grid pixel secara lokal di perangkat.</p>
+<label>Upload gambar<input id="imgfile" type="file" accept="image/*"></label>
+<div class="row"><label style="flex:1">Lebar LED<input id="cols" type="number" min="4" max="100" value="32"></label><label style="flex:1">Tinggi LED<input id="rows" type="number" min="4" max="60" value="12"></label></div>
+<button onclick="pixelate()">Convert to Pixel</button> <button onclick="animatePixel()">▶ Animasi</button>
+<canvas id="pixelcanvas" width="384" height="144"></canvas>
+<div class="row"><span class="muted" id="pixelcount">384 LED (32 × 12)</span><button onclick="savePixel()">Simpan PNG</button></div>
+<label>Brightness<input type="range" min="5" max="100" value="85"></label><label>Animation Speed<input type="range" min="1" max="100" value="50"></label>
+</div></section>
+
+<section id="suspension" class="page"><h2 class="title">Air Suspension</h2><div class="panel">
+<p class="muted">Atur ketinggian tiap sudut (simulasi).</p>
+<div class="grid">
+<label>FL<input type="range" min="0" max="100" value="50"></label><label>FR<input type="range" min="0" max="100" value="50"></label>
+<label>RL<input type="range" min="0" max="100" value="50"></label><label>RR<input type="range" min="0" max="100" value="50"></label>
+</div><div class="row"><button onclick="alert('Preset Low tersimpan (demo)')">LOW</button><button onclick="alert('Preset Ride tersimpan (demo)')">RIDE</button><button onclick="alert('Preset High tersimpan (demo)')">HIGH</button></div></div></section>
+
+<section id="drag" class="page"><h2 class="title">Drag Controller</h2><div class="panel">
+<div class="stat"><div><b id="speed">0</b><small>KM/H</small></div><div><b id="rpm">900</b><small>RPM</small></div><div><b id="gear">N</b><small>GEAR</small></div></div>
+<div class="big" id="timer">00:00.0</div>
+<label>Durasi drag (detik)<input id="duration" type="number" value="10" min="1" max="120"></label>
+<label>Jarak<select id="distance"><option>201 meter</option><option selected>402 meter</option><option>1000 meter</option></select></label>
+<label>Launch RPM<input type="range" min="1000" max="8000" value="4000"></label>
+<label>Shift time (detik)<input type="number" value="0.2" step="0.05"></label>
+<div class="row"><button onclick="startDrag()">START DRAG</button><button onclick="resetDrag()">RESET</button></div>
+<div class="row"><button onclick="gas(true)">GAS</button><button onclick="gas(false)">RELEASE</button></div>
+<p class="muted">Simulasi timer dan telemetry; belum mengendalikan kendaraan Roblox.</p>
+</div></section>
+
+<section id="ecu" class="page"><h2 class="title">ECU & Dyno</h2><div class="panel"><div class="stat"><div><b>2.4L</b><small>ENGINE</small></div><div><b>320</b><small>HP DEMO</small></div><div><b>420</b><small>NM DEMO</small></div></div><p class="muted">Data contoh untuk pratinjau antarmuka.</p><canvas id="dyno" width="600" height="220"></canvas></div></section>
+<section id="sound" class="page"><h2 class="title">Sound Sync</h2><div class="panel"><p class="muted">Pilih mode animasi simulasi.</p><select><option>Bass Pulse</option><option>Wave</option><option>Rainbow</option></select><label>Sensitivity<input type="range" min="1" max="100" value="65"></label><button onclick="alert('Sound Sync demo aktif')">ACTIVATE DEMO</button></div></section>
+</main>
+<nav><button class="active" onclick="show('home',this)">⌂<br>HOME</button><button onclick="show('lighting',this)">✧<br>LIGHT</button><button onclick="show('pixel',this)">▦<br>PIXEL</button><button onclick="show('drag',this)">🏁<br>DRAG</button><button onclick="show('suspension',this)">🚘<br>CAR</button></nav>
+<script>
+function show(id,btn){document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));document.getElementById(id).classList.add('active');document.querySelectorAll('nav button').forEach(x=>x.classList.remove('active'));if(btn)btn.classList.add('active');}
+let sourceImage=null,anim=null;
+const pc=document.getElementById('pixelcanvas'),ctx=pc.getContext('2d');
+function pixelate(){let c=+document.getElementById('cols').value||32,r=+document.getElementById('rows').value||12;pc.width=c*12;pc.height=r*12;ctx.fillStyle='#05080e';ctx.fillRect(0,0,pc.width,pc.height);if(sourceImage){let t=document.createElement('canvas');t.width=c;t.height=r;let x=t.getContext('2d');x.drawImage(sourceImage,0,0,c,r);let d=x.getImageData(0,0,c,r).data;for(let yy=0;yy<r;yy++)for(let xx=0;xx<c;xx++){let i=(yy*c+xx)*4;ctx.fillStyle=`rgb(${d[i]},${d[i+1]},${d[i+2]})`;ctx.fillRect(xx*12,yy*12,10,10)}}else{for(let yy=0;yy<r;yy++)for(let xx=0;xx<c;xx++){ctx.fillStyle=(xx+yy)%3?'#168acb':'#56dfff';ctx.fillRect(xx*12,yy*12,10,10)}}document.getElementById('pixelcount').textContent=(c*r)+' LED ('+c+' × '+r+')';}
+document.getElementById('imgfile').addEventListener('change',e=>{let f=e.target.files[0];if(f){sourceImage=new Image();sourceImage.onload=pixelate;sourceImage.src=URL.createObjectURL(f)}});
+function animatePixel(){if(anim){clearInterval(anim);anim=null;return}let hue=0;anim=setInterval(()=>{hue=(hue+15)%360;ctx.fillStyle=`hsla(${hue},90%,55%,.12)`;ctx.fillRect(0,0,pc.width,pc.height)},150)}
+function savePixel(){let a=document.createElement('a');a.download='91-speed-shop-pixel.png';a.href=pc.toDataURL();a.click()}
+let started=false,elapsed=0,interval=null,spd=0;
+function startDrag(){if(interval)clearInterval(interval);started=true;let max=+(document.getElementById('duration').value||10);let begin=Date.now()-elapsed*1000;interval=setInterval(()=>{elapsed=(Date.now()-begin)/1000;document.getElementById('timer').textContent='00:'+String(Math.floor(elapsed)).padStart(2,'0')+'.'+Math.floor((elapsed%1)*10);document.getElementById('speed').textContent=Math.min(280,Math.floor(elapsed*24));document.getElementById('rpm').textContent=Math.min(8000,900+Math.floor(elapsed*700));if(elapsed>=max){clearInterval(interval);interval=null}},100)}
+function resetDrag(){clearInterval(interval);interval=null;elapsed=0;['timer','speed','rpm'].forEach((id,i)=>document.getElementById(id).textContent=['00:00.0','0','900'][i])}
+function gas(on){document.getElementById('rpm').textContent=on?'5200':'900'}
+const dc=document.getElementById('dyno').getContext('2d');dc.strokeStyle='#45caff';dc.lineWidth=4;dc.beginPath();dc.moveTo(20,190);dc.bezierCurveTo(130,170,160,35,300,55);dc.bezierCurveTo(420,65,480,100,580,130);dc.stroke();dc.strokeStyle='#30445d';dc.lineWidth=1;for(let y=30;y<200;y+=40){dc.beginPath();dc.moveTo(20,y);dc.lineTo(580,y);dc.stroke()}
+pixelate();
+</script>
+</body></html>
